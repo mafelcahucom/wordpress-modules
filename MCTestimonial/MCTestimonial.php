@@ -540,11 +540,15 @@ final class MCTestimonial {
 		for ( $i=5; $i >= 1; $i-- ) { 
 			$count = $this->getEachRatingCount( $i )[0]->count;
 			$total_count = $this->getTotalRatingCount()[0]->count;
+			$percent = 0;
+			if ( ! empty( $total_count ) ) {
+				$percent = number_format( ( $count / $total_count ) * 100 );
+			}
 			$new_item = [
 				'rating'  => $i,
 				'count'   => $count,
 				'link'	  => get_post_type_archive_link( 'testimonial' ) .'?rating='. $i,
-				'percent' => number_format( ( $count / $total_count ) * 100 ) .'%'
+				'percent' => $percent .'%'
 			];
 			array_push( $output, $new_item );
 		}
